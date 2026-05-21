@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel — UltraGames</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=DM+Mono:wght@300;400;500&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/admin.css" />
+</head>
+
+<body>
+
+  <!-- ── HEADER ──────────────────────────────────────────────────── -->
+  <header>
+    <div class="logo">
+      <div class="logo-icon">UG</div>
+      <span class="logo-text">ULTRAGAMES</span>
+      <span class="logo-badge">ADMIN</span>
+    </div>
+    <div class="header-right">
+      <span class="admin-id" id="admin-email">admin@ultragames.local</span>
+      <button class="btn-logout" onclick="logout()">Logout</button>
+    </div>
+  </header>
+
+  <!-- ── MAIN ────────────────────────────────────────────────────── -->
+  <main>
+
+    <div class="page-header">
+      <h1 class="page-title">// PANNELLO DI CONTROLLO</h1>
+      <p class="page-subtitle">Gestione utenti, punteggi e sessioni attive</p>
+    </div>
+
+    <!-- Overview cards -->
+    <div class="overview">
+      <div class="stat-card green">
+        <div class="stat-label">Utenti totali</div>
+        <div class="stat-value" id="stat-total">—</div>
+      </div>
+      <div class="stat-card cyan">
+        <div class="stat-label">Partite Tris</div>
+        <div class="stat-value" id="stat-tris">—</div>
+      </div>
+      <div class="stat-card magenta">
+        <div class="stat-label">Partite Dama</div>
+        <div class="stat-value" id="stat-dama">—</div>
+      </div>
+      <div class="stat-card red">
+        <div class="stat-label">Sessioni Reaction</div>
+        <div class="stat-value" id="stat-reaction">—</div>
+      </div>
+    </div>
+
+    <!-- Table toolbar -->
+    <div class="toolbar">
+      <span class="section-title">// GIOCATORI</span>
+      <input class="search-box" type="text" placeholder="Cerca per nome o email…" id="search" oninput="filterUsers()" />
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th class="sortable" onclick="sortBy('name')">Nome ↕</th>
+            <th>Email</th>
+            <th class="sortable" onclick="sortBy('trisWins')">Tris W ↕</th>
+            <th>Tris L</th>
+            <th>Tris D</th>
+            <th class="sortable" onclick="sortBy('damaWins')">Dama W ↕</th>
+            <th>Dama L</th>
+            <th class="sortable" onclick="sortBy('reactionMs')">Reaction ↕</th>
+            <th>Tentativi</th>
+            <th>Azioni</th>
+          </tr>
+        </thead>
+        <tbody id="user-table-body">
+          <tr>
+            <td colspan="10">
+              <div class="loading">
+                <div class="spinner"></div>Caricamento…
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+
+  <!-- ── EDIT MODAL ────────────────────────────────────────────── -->
+  <div class="modal-backdrop" id="edit-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <span class="modal-title">// MODIFICA PUNTEGGI</span>
+        <button class="modal-close" onclick="closeEdit()">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-user-name">Giocatore: <span id="edit-name">—</span></p>
+
+        <div class="stats-grid">
+          <span class="stats-group-label">Tris</span>
+          <div class="input-group">
+            <label class="input-label">Vittorie</label>
+            <input class="stat-input" type="number" min="0" id="tris-wins" />
+          </div>
+          <div class="input-group">
+            <label class="input-label">Sconfitte</label>
+            <input class="stat-input" type="number" min="0" id="tris-losses" />
+          </div>
+          <div class="input-group">
+            <label class="input-label">Pareggi</label>
+            <input class="stat-input" type="number" min="0" id="tris-draws" />
+          </div>
+
+          <span class="stats-group-label">Dama</span>
+          <div class="input-group">
+            <label class="input-label">Vittorie</label>
+            <input class="stat-input" type="number" min="0" id="dama-wins" />
+          </div>
+          <div class="input-group">
+            <label class="input-label">Sconfitte</label>
+            <input class="stat-input" type="number" min="0" id="dama-losses" />
+          </div>
+          <div></div>
+
+          <span class="stats-group-label">Reaction Test</span>
+          <div class="input-group">
+            <label class="input-label">Best (ms)</label>
+            <input class="stat-input" type="number" min="0" id="reaction-ms" />
+          </div>
+          <div class="input-group">
+            <label class="input-label">Tentativi</label>
+            <input class="stat-input" type="number" min="0" id="reaction-attempts" />
+          </div>
+          <div></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-cancel" onclick="closeEdit()">Annulla</button>
+        <button class="btn-save" onclick="saveStats()">Salva</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── BAN MODAL ─────────────────────────────────────────────── -->
+  <div class="modal-backdrop" id="ban-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <span class="modal-title" style="color:var(--danger);text-shadow:var(--glow-red)">// BANNA UTENTE</span>
+        <button class="modal-close" onclick="closeBan()">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="confirm-text">
+          Stai per <strong>eliminare definitivamente</strong> l'account di<br />
+          <strong id="ban-name" style="color:var(--text-light)">—</strong>.<br /><br />
+          Tutti i dati e i punteggi verranno cancellati. Questa azione è irreversibile.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-cancel" onclick="closeBan()">Annulla</button>
+        <button class="btn-ban" onclick="confirmBan()">Banna</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TOAST ─────────────────────────────────────────────────── -->
+  <div id="toast-container"></div>
+  <script src="/static/js/admin.js" defer></script>
+</body>
+
+</html>

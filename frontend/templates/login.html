@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Accedi — UltraGames</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=DM+Mono:wght@300;400&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/login.css" />
+</head>
+
+<body>
+
+  <!-- LEFT -->
+  <div class="panel-left">
+    <div class="left-logo">⚡ UltraGames</div>
+
+    <div class="left-headline">
+      <h1>BENTORNATO<br />NEL TUO<br /><em>SPAZIO</em>.</h1>
+      <p>// Accedi per continuare</p>
+    </div>
+
+    <div class="left-stats">
+      <div class="stat-row">
+        <span>Giocatori Attivi</span>
+        <div class="stat-bar">
+          <div class="stat-bar-fill" style="width: 80%;"></div>
+        </div>
+        <span style="color: var(--primary)">+2.4k</span>
+      </div>
+      <div class="stat-row">
+        <span>Partite Giocate</span>
+        <div class="stat-bar">
+          <div class="stat-bar-fill" style="width: 95%;"></div>
+        </div>
+        <span style="color: var(--primary)">+50k</span>
+      </div>
+      <div class="stat-row">
+        <span>Uptime Sistema</span>
+        <div class="stat-bar">
+          <div class="stat-bar-fill" style="width: 99%;"></div>
+        </div>
+        <span style="color: var(--primary)">99.9%</span>
+      </div>
+    </div>
+
+    <div class="left-footer">© 2026 UltraGames · Tutti i diritti riservati</div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="panel-right">
+    <div class="form-card">
+      <div class="form-tag">Accesso</div>
+      <h2>Accedi</h2>
+      <p class="subtitle">Inserisci le tue credenziali per entrare.</p>
+
+      <div id="alert" class="alert"></div>
+
+      <div class="form-group">
+        <label for="email">Indirizzo email</label>
+        <input type="email" id="email" placeholder="nome@esempio.it" autocomplete="email" required />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="••••••••" autocomplete="current-password" required />
+      </div>
+
+      <button class="btn-primary" id="btn-login" type="button">
+        <span class="btn-text">▶ Accedi</span>
+        <div class="spinner"></div>
+      </button>
+
+      <div class="form-footer">
+        Non hai un account? <a href="/register">Registrati</a>
+      </div>
+    </div>
+  </div>
+  <script src="/static/js/login.js" defer></script>
+</body>
+
+</html>

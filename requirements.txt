@@ -1,0 +1,16 @@
+# Framework
+Django>=4.2,<5.0
+mysqlclient>=2.2.0          # driver MySQL/MariaDB per Django ORM (anche senza usare l'ORM)
+gunicorn>=23.0.0
+whitenoise>=6.9.0
+python-dotenv>=1.2.2
+
+# Autenticazione e crittografia
+PyJWT>=2.8.0
+bcrypt>=4.1.0
+
+# Connessione diretta MariaDB (usata dai repository)
+mariadb>=1.1.14
+
+# Opzionale: server WSGI per produzione
+# gunicorn>=21.0.0

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registrati — UltraGames</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=DM+Mono:wght@300;400&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/register.css" />
+</head>
+
+<body>
+
+  <!-- LEFT -->
+  <div class="panel-left">
+    <div class="left-logo">⚡ UltraGames</div>
+
+    <div class="left-headline">
+      <h1>CREA IL<br />TUO<br /><em>ACCOUNT</em>.</h1>
+      <p>// Tre passi, pochi secondi</p>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">01 —</span>
+        <span class="step-text">Inserisci i tuoi dati personali</span>
+      </div>
+      <div class="step">
+        <span class="step-num">02 —</span>
+        <span class="step-text">Scegli una password sicura</span>
+      </div>
+      <div class="step">
+        <span class="step-num">03 —</span>
+        <span class="step-text">Accedi al tuo spazio personale</span>
+      </div>
+    </div>
+
+    <div class="left-footer">© 2026 UltraGames · Tutti i diritti riservati</div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="panel-right">
+    <div class="form-card">
+      <div class="form-tag">Nuovo account</div>
+      <h2>Registrati</h2>
+      <p class="subtitle">Compila il modulo per creare il tuo account.</p>
+
+      <div id="alert" class="alert"></div>
+
+      <div class="form-group">
+        <label for="name">Nome completo</label>
+        <input type="text" id="name" placeholder="Mario Rossi" autocomplete="name" required />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Indirizzo email</label>
+        <input type="email" id="email" placeholder="nome@esempio.it" autocomplete="email" required />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Almeno 8 caratteri" autocomplete="new-password" required />
+        <div class="strength-bar">
+          <div class="strength-fill" id="strength-fill"></div>
+        </div>
+        <div class="password-hint" id="strength-label">// Forza password</div>
+      </div>
+
+      <button class="btn-primary" id="btn-register" type="button">
+        <span class="btn-text">▶ Crea Account</span>
+        <div class="spinner"></div>
+      </button>
+
+      <div class="form-footer">
+        Hai già un account? <a href="/login">Accedi</a>
+      </div>
+    </div>
+  </div>
+  <script src="/static/js/register.js" defer></script>
+</body>
+
+</html>
